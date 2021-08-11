@@ -1,9 +1,15 @@
 import React from "react";
+import NoteScreen from "../notes/NoteScreen";
+import Sidebar from "./Sidebar";
 
 const JournalScreen = () => {
   return (
-    <div>
-      <h1>Journal Screen</h1>
+    <div className="journal__main-content">
+      <Sidebar />
+      <main className="journal__main-section">
+        {/* <NothingSelected /> */}
+        <NoteScreen />
+      </main>
     </div>
   );
 };

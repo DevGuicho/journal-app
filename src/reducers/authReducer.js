@@ -1,9 +1,9 @@
-import { LOGGIN, LOGOUT } from "../types";
+import { LOGIN, LOGOUT } from "../types";
 
 /* eslint-disable import/no-anonymous-default-export */
 export default (state = {}, action) => {
   switch (action.type) {
-    case LOGGIN:
+    case LOGIN:
       return {
         uid: action.payload.uid,
         name: action.payload.displayName,

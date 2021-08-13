@@ -1,32 +1,65 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { activeNote, startDeleting } from "../../actions/notesActions";
+import useForm from "../../hooks/useForm";
 import NotesAppBar from "./NotesAppBar";
 
 const NoteScreen = () => {
+  const { active: note } = useSelector((state) => state.notes);
+  const [formValues, handleInput, reset] = useForm(note);
+  const { body, title, id } = formValues;
+
+  const dispatch = useDispatch();
+
+  const activeId = useRef(note.id);
+
+  const handleDelete = () => {
+    dispatch(startDeleting(id));
+  };
+
+  useEffect(() => {
+    if (note.id !== activeId.current) {
+      reset();
+      activeId.current = note.id;
+    }
+  }, [note, reset]);
+
+  useEffect(() => {
+    dispatch(activeNote(formValues.id, { ...formValues }));
+  }, [formValues, dispatch]);
+
   return (
     <div className="notes__main-content">
       <NotesAppBar />
       <form className="notes__content">
         <input
           type="text"
-          name=""
+          name="title"
           id=""
           autoComplete="off"
           placeholder="Some awesome title"
           className="notes__title-input"
+          onChange={handleInput}
+          value={title}
         />
         <textarea
-          name=""
+          name="body"
           id=""
           placeholder="What happen today"
           className="notes__textarea"
+          onChange={handleInput}
+          value={body}
         ></textarea>
-        <div className="notes__image">
-          <img
-            src="https://images.unsplash.com/photo-1588948378271-ae6cf0060ff8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
-            alt="imagen"
-          />
-        </div>
+        {note.url && (
+          <div className="notes__image">
+            <img src={note.url} alt="imagen" />
+          </div>
+        )}
       </form>
+      <button className="btn btn-danger" onClick={handleDelete}>
+        Delete
+      </button>
     </div>
   );
 };

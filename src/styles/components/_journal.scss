@@ -59,11 +59,14 @@
 }
 
 .journal__entry {
-  background-color: white;
-  border-radius: 5px;
-  color: $dark-grey;
-  display: flex;
+  /* display: flex;
+  justify-content: space-between; */
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: white;
+  color: $dark-grey;
   overflow: hidden;
   cursor: pointer;
 }
@@ -88,7 +91,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 5px;
+  padding: 10px 20px;
   span {
     font-size: 12px;
   }

@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 
 import JournalApp from "./JournalApp";
 import "./styles/styles.scss";
+import "animate.css";
 
 ReactDOM.render(
   <Provider store={store}>

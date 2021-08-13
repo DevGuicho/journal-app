@@ -56,7 +56,10 @@ const RegisterScreen = () => {
       <h3 className="auth__title">Register</h3>
       <Toaster />
 
-      <form onSubmit={handleSubmit}>
+      <form
+        className="animate__animated animate__fadeIn animate__faster"
+        onSubmit={handleSubmit}
+      >
         <input
           className="auth__input"
           type="text"

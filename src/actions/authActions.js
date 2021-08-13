@@ -2,6 +2,7 @@ import { FINISH_LOADING, LOGIN, LOGOUT, START_LOADING } from "../types";
 import { firebase, googleAuthProvider } from "../firebase/firebaseConfig";
 import { setError } from "./uiActions";
 import toast from "react-hot-toast";
+import { noteLogout } from "./notesActions";
 export const startLoginEmailPassword = (email, password) => (dispatch) => {
   dispatch(startLoading());
   firebase
@@ -59,6 +60,7 @@ export const login = (uid, displayName) => ({
 export const startLogout = () => async (dispatch) => {
   await firebase.auth().signOut();
   dispatch(logout());
+  dispatch(noteLogout());
 };
 export const logout = () => ({
   type: LOGOUT,
